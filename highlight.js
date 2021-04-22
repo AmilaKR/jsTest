@@ -35,8 +35,15 @@ function getStyleList() {
     return styleString;
 }
 
+function elementHighlight(element){
+    highlightSelectedLevel(element);
+}
+
+function xPathHighlight(xPath){
+    var ele = document.querySelector(xPath);
+    highlightSelectedLevel(ele);
+}
+
 var el = document.createElement('style');
 el.innerHTML = getStyleList();
 document.getElementsByTagName('head')[0].appendChild(el);
-
-console.log("a");
