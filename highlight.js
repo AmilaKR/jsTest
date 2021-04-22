@@ -40,6 +40,7 @@ function elementHighlight(element){
 }
 
 function xPathHighlight(tag, text){
+    console.log(text);
     var ele = document.querySelectorAll(tag);
     ele.forEach(e => {
         if(e.textContent == text){
