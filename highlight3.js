@@ -39,6 +39,7 @@ function elementHighlight(element){
 }
 
 function hotReloadHighlight(xPath){
+    console.log(xPath);
     var ele = document.querySelector(xPath);
     highlightSelectedLevel(ele);
 }
