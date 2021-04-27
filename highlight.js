@@ -39,14 +39,9 @@ function elementHighlight(element){
     highlightSelectedLevel(element);
 }
 
-function xPathHighlight(tag, text){
-    console.log(text);
-    var ele = document.querySelectorAll(tag);
-    ele.forEach(e => {
-        if(e.textContent == text){
-            highlightSelectedLevel(e);
-        }
-    })
+function hotReloadHighlight(xPath){
+    var ele = document.querySelector(xPath);
+    highlightSelectedLevel(ele);
 }
 
 var el = document.createElement('style');
