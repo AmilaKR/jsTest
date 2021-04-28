@@ -1,12 +1,38 @@
 var colorList = [];
 
-function highlightSelectedLevel(element){
+function highlightSelectedLevel(element, level, name){
     document.querySelectorAll("*").forEach(e => {
         if(e.isEqualNode(element)){
-            e.setAttribute('spider', '1'); 
-            e.setAttribute('title', 'name');
+            e.setAttribute('spider', level); 
+            e.setAttribute('title', name);
         }
     })
+    console.log("Added");
+}
+
+function removeHighlights(highlightSelector, highlightPattern){
+    document.querySelectorAll("'" + highlightSelector + "'").forEach(e=>{ 
+        if(e.textContent.match("'" + highlightPattern + "'"))
+        { 
+            e.removeAttribute('spider'); 
+            e.removeAttribute('title');
+        }
+        });
+    console.log("Removed");
+}
+
+function removeElementHighlights(element){
+    element.removeAttribute('spider'); 
+    element.removeAttribute('title');
+    console.log("Removed");
+}
+
+function removeAllHighlights(){
+    document.querySelectorAll("*").forEach(e=>{ 
+            e.removeAttribute('spider'); 
+            e.removeAttribute('title');
+        });
+    console.log("Removed");
 }
 
 function getRandomColors() {
@@ -34,18 +60,35 @@ function getStyleList() {
     return styleString;
 }
 
-function elementHighlight(element){
-    highlightSelectedLevel(element);
+function elementHighlight(element, level = null, name = null, action){
+    highlightSelectedLevel(element, level, name);
+    switch (action) {
+        case "add":
+            highlightSelectedLevel(element, level, name);
+            break;
+        case "remove":
+            removeElementHighlights(element)
+            break;
+        default:
+            removeAllHighlights();
+            break;
+    }
 }
 
-function xPathHighlight(tag, text){
-    console.log(text);
-    var ele = document.querySelectorAll(tag);
-    ele.forEach(e => {
-        if(e.textContent == text){
-            highlightSelectedLevel(e);
-        }
-    })
+function hotReloadHighlight(xPath, level = null, name = null, action){
+    var ele = document.querySelector(xPath);
+    
+    switch (action) {
+        case "add":
+            highlightSelectedLevel(ele, level, name);
+            break;
+        case "remove":
+            removeAllHighlights();
+            break;
+        default:
+            removeAllHighlights();
+            break;
+    }
 }
 
 var el = document.createElement('style');
